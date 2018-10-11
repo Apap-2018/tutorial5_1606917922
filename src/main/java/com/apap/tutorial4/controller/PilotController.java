@@ -35,7 +35,7 @@ public class PilotController {
 		return "add";
 	}
 	
-	@RequestMapping(value="/pilot/view")
+	@RequestMapping(value="/pilot/view", method = RequestMethod.GET)
 	private String viewPilot(@RequestParam("licenseNumber") String licenseNumber, Model model) {
 		PilotModel pilot = pilotService.getPilotDetailByLicenseNumber(licenseNumber);
 		if (pilot == null) {
@@ -43,7 +43,8 @@ public class PilotController {
 			return "error-message";
 		}
 		else {
-			model.addAttribute("pilot",pilot);
+			
+			model.addAttribute("pilot", pilot);
 	        model.addAttribute("flights", pilot.getPilotFlight());
 
 			return "view-pilot";
